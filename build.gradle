@@ -10,8 +10,8 @@ jar {
     }
 }
 
-group 'net.cyanmarine'
-version '1.0-SNAPSHOT'
+version = project.version
+group = project.group
 
 repositories {
     mavenCentral()
