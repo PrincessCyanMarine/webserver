@@ -37,7 +37,7 @@ const onload = (dontupdate) => {
   const urlParams = new URLSearchParams(window.location.search);
   path = urlParams.get("path") || "/";
   showSystem = urlParams.get("system") == "true";
-  //document.getElementById("system").checked = showSystem;
+  document.getElementById("system").checked = showSystem;
   reload(dontupdate);
 };
 

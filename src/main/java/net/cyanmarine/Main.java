@@ -7,11 +7,11 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class Main {
     public static final String CRLF = "\r\n";
     public static final AtomicBoolean running = new AtomicBoolean(true);
+    private static final int port = 80;
 
     public static void main(String[] args) throws Exception {
         Logger.init("WebServer");
         Logger.info("Initializing web server...");
-        int port = 80;
         ServerSocket server = new ServerSocket(port);
         Logger.info("Web server initialized on port " + port);
 
@@ -36,8 +36,8 @@ public class Main {
         Logger.write("\n\n");
         Logger.info("New Request");
         Logger.info("Handling connection from " + socket.getInetAddress().getHostAddress());
-        RequestHandler request = new RequestHandler(socket);
-        Thread thread = new Thread(request);
+        RequestHandler handler = new RequestHandler(socket);
+        Thread thread = new Thread(handler);
         thread.start();
     }
 }

@@ -26,7 +26,7 @@ public class Pages {
         if (match == null) return false;
         Function<HttpRequest, Boolean> function = pages.get(match);
         if (function == null) return false;
-        Logger.info("Found match for " + request.getPath());
+        Logger.info("Found page match for " + request.getPath());
         try {
             return function.apply(request);
         } catch (Exception e) {
@@ -44,8 +44,8 @@ public class Pages {
             return true;
         });
 
-        Pages.addPage("/api/files/?.*", (HttpRequest request) -> readPath(request, "./public/"));
-        // Pages.addPage("/api/system/files?.*", (HttpRequest request) -> readPath(request, ""));
+        Pages.addPage("/api/files.*", (HttpRequest request) -> readPath(request, "./public/"));
+        Pages.addPage("/api/system/files.*", (HttpRequest request) -> readPath(request, ""));
     }
 
     private static boolean readPath(HttpRequest request, String start_path) {

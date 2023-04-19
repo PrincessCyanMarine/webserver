@@ -8,7 +8,7 @@ import java.util.StringTokenizer;
 
 import static net.cyanmarine.Main.CRLF;
 
-public class HttpRequest extends Socket {
+public class HttpRequest {
     private final DataOutputStream out;
     private final BufferedReader reader;
     private final String request;
@@ -131,7 +131,7 @@ public class HttpRequest extends Socket {
         //sendHeader(statusCode, contentTypeLine, os);
 
         if (fileExists) this.sendFile(statusCode);
-        else sendText(statusCode, body);
+        else sendText(statusCode, body, getMime(".html"));
     }
 
     public void sendFile(int statusCode) throws Exception {
@@ -183,7 +183,7 @@ public class HttpRequest extends Socket {
     public void close() throws IOException {
         this.out.close();
         this.reader.close();
-        super.close();
+        this.socket.close();
     }
 
     public String getContentType() {
